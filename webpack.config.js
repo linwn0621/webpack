@@ -14,13 +14,27 @@ module.exports = {
     },
     // 模块加载器配置项
     module: {
+        // 加载css
         rules: [{
-            test: /\.css$/, // 匹配css扩展名文件
-            use: [ // 配置loader加载器
-                'style-loader', // 把css代码写入到网页中
-                'css-loader' // 读取css的代码
-            ]
-        }]
+                test: /\.css$/, // 匹配css扩展名文件
+                use: [ // 配置loader加载器
+                    'style-loader', // 把css代码写入到网页中
+                    'css-loader' // 读取css的代码
+                ]
+            },
+            {
+                test: /\.less$/, // 匹配css扩展名文件
+                use: [ // 配置loader加载器
+                    'style-loader', // 把css代码写入到网页中
+                    'css-loader',
+                    "less-loader" // 读取css的代码
+                ]
+            }
+        ],
+        // 加载less
+
+
     }
+
 
 };
