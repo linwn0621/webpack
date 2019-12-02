@@ -21,6 +21,9 @@ module.exports = {
         // path.resolve方法获取到绝对路径。
         path: path.resolve(__dirname, __dirname, 'dist')
     },
+
+    devtool: "source-map", // + 生成映射源代码文件
+
     // 模块加载器配置项
     module: {
         // 加载css
