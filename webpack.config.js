@@ -7,6 +7,11 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 // 引入自动生成html插件
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
+// 导入清除插件
+const {
+    CleanWebpackPlugin
+} = require('clean-webpack-plugin');
+
 module.exports = {
     // 可以通过在 webpack 配置中配置 entry 入口属性， 来指定一个入口起点（ 或多个入口起点）。 默认值为. / src。
     entry: './src/index.js',
@@ -77,6 +82,17 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: "public/index.html" // template指定默认html模板
         })
+    ],
+    plugins: [
+        new ExtractTextPlugin("style/style.css"),
+
+        // 调用清除打包目录插件
+        new CleanWebpackPlugin(),
+
+        new HtmlWebpackPlugin({
+            template: "public/index.html"
+        }),
+
     ]
 
 
