@@ -10,7 +10,17 @@ module.exports = {
     output: {
         filename: 'bundle.js',
         // path.resolve方法获取到绝对路径。
-        path:path.resolve(__dirname,__dirname,'dist')
+        path: path.resolve(__dirname, __dirname, 'dist')
+    },
+    // 模块加载器配置项
+    module: {
+        rules: [{
+            test: /\.css$/, // 匹配css扩展名文件
+            use: [ // 配置loader加载器
+                'style-loader', // 把css代码写入到网页中
+                'css-loader' // 读取css的代码
+            ]
+        }]
     }
 
 };
