@@ -1,7 +1,8 @@
 // 引入模块
 const path = require("path");
 
-
+//  导入提取样式的webpack插件
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
     // 可以通过在 webpack 配置中配置 entry 入口属性， 来指定一个入口起点（ 或多个入口起点）。 默认值为. / src。
@@ -15,26 +16,45 @@ module.exports = {
     // 模块加载器配置项
     module: {
         // 加载css
-        rules: [{
-                test: /\.css$/, // 匹配css扩展名文件
-                use: [ // 配置loader加载器
-                    'style-loader', // 把css代码写入到网页中
-                    'css-loader' // 读取css的代码
-                ]
-            },
+        rules: [
+            // {
+            //     test: /\.css$/, // 匹配css扩展名文件
+            //     use: [ // 配置loader加载器
+            //         'style-loader', // 把css代码写入到网页中
+            //         'css-loader' // 读取css的代码
+            //     ]
+            // },
             {
-                test: /\.less$/, // 匹配css扩展名文件
-                use: [ // 配置loader加载器
-                    'style-loader', // 把css代码写入到网页中
-                    'css-loader',
-                    "less-loader" // 读取css的代码
-                ]
+                test: /\.css$/,
+                use: ExtractTextPlugin.extract({ // 提取css
+                    fallback: "style-loader",
+                    use: ["css-loader"]
+                })
+            },
+            // 加载less
+            // {
+            //     test: /\.less$/, // 匹配css扩展名文件
+            //     use: [ // 配置loader加载器
+            //         'style-loader', // 把css代码写入到网页中
+            //         'css-loader',
+            //         "less-loader" // 读取css的代码
+            //     ]
+            // }
+            {
+                test: /\.less$/,
+                use: ExtractTextPlugin.extract({ // 提取less
+                    fallback: "style-loader",
+                    use: ["css-loader", "less-loader"]
+                })
             }
         ],
-        // 加载less
 
 
-    }
 
+    },
+    // 调用提取插件
+    plugins: [
+        new ExtractTextPlugin('style/style.css') // 提取到dist的style文件夹中
+    ]
 
 };
