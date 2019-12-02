@@ -24,6 +24,12 @@ module.exports = {
 
     devtool: "source-map", // + 生成映射源代码文件
 
+    // + 开发服务配置
+    devServer: {
+        port: 8000 // 默认端口是8080
+    },
+
+
     // 模块加载器配置项
     module: {
         // 加载css
