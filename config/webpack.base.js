@@ -14,12 +14,16 @@ const {
 
 module.exports = {
     // 可以通过在 webpack 配置中配置 entry 入口属性， 来指定一个入口起点（ 或多个入口起点）。 默认值为. / src。
-    entry: './src/index.js',
+    entry: {
+        index: './src/index.js',
+        about: './src/about.js'
+    },
     // 出口  output 属性告诉 webpack 在哪里输出它所创建的 bundles
     output: {
-        filename: 'bundle.js',
+        // filename: 'bundle.js',
+        filename: '[name]bundle.js',
         // path.resolve方法获取到绝对路径。
-        path: path.resolve(__dirname, __dirname, 'dist')
+        path: path.resolve('dist')
     },
 
     devtool: "source-map", // + 生成映射源代码文件
@@ -67,10 +71,12 @@ module.exports = {
             {
                 test: /\.(png|svg|jpg|gif)$/, // 匹配图片文件
                 use: [{
-                    loader: "file-loader", // 处理图片文件返回链接
+                    // loader: "file-loader", // 处理图片文件返回链接
+                    loader: "url-loader",
                     options: {
                         publicPath: "./images/", //  引入图片时会在路径前面加上该选项
-                        outputPath: "images" //  输出到dist下的images目录
+                        outputPath: "images", //  输出到dist下的images目录
+                        limit: 102400 //当图片小于这个参数时会自动转成base64格式
                     }
                 }]
             }
@@ -93,4 +99,4 @@ module.exports = {
     ]
 
 
-};
+}
