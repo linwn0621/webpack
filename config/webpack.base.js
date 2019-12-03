@@ -32,7 +32,12 @@ module.exports = {
     devServer: {
         port: 8000 // 默认端口是8080
     },
-
+    // + 提取公共模块配置
+    optimization: {
+        splitChunks: {
+            chunks: 'all' // 提取所有文件的共同模块
+        }
+    },
 
     // 模块加载器配置项
     module: {
